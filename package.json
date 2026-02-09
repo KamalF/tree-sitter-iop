@@ -1,16 +1,27 @@
 {
   "name": "tree-sitter-iop",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "IOP (Intersec Object Packer) grammar for tree-sitter",
+  "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tree-sitter test",
+    "generate": "tree-sitter generate",
     "install": "node-gyp-build",
     "prebuildify": "prebuildify --napi --strip"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ilan-schemoul/tree-sitter-iop.git"
+  },
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "iop",
+    "intersec"
+  ],
   "dependencies": {
     "node-addon-api": "^7.1.0",
     "node-gyp-build": "^4.8.0"
@@ -38,7 +49,11 @@
   "tree-sitter": [
     {
       "scope": "source.iop",
-      "injection-regex": "^iop$"
+      "injection-regex": "^iop$",
+      "file-types": [
+        "iop"
+      ],
+      "highlights": "queries/iop/highlights.scm"
     }
   ]
 }
