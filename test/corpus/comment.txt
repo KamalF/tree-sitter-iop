@@ -1,0 +1,62 @@
+================================================================================
+Line comment
+================================================================================
+
+// this is a comment
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Block comment
+================================================================================
+
+/* this is a block comment */
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Multi-line block comment
+================================================================================
+
+/**
+ * This is a multi-line
+ * documentation comment.
+ */
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))

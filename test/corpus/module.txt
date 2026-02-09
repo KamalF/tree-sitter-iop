@@ -1,0 +1,63 @@
+================================================================================
+Simple module
+================================================================================
+
+module MyModA {
+    MyIfaceA a;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (module_definition
+    (identifier)
+    (module_block
+      (module_field
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Module with inheritance
+================================================================================
+
+module MyModC : MyModA, MyModB {
+    MyIfaceC c1;
+    MyIfaceC c2;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (module_definition
+    (identifier)
+    (module_inheritance
+      (identifier)
+      (identifier))
+    (module_block
+      (module_field
+        (identifier)
+        (identifier))
+      (module_field
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Module with tagged fields
+================================================================================
+
+module Core {
+16384:
+    Log log;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (module_definition
+    (identifier)
+    (module_block
+      (module_field
+        (tag
+          (tag_number))
+        (identifier)
+        (identifier)))))

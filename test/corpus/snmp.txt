@@ -1,0 +1,109 @@
+================================================================================
+SNMP object definition
+================================================================================
+
+@snmpParam
+snmpObj Obj : 1 : snmp_intersec_test.Test {
+1:  string a;
+2:  int b;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (snmp_object_definition
+    (attribute
+      (identifier))
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (data_structure_block
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier)))
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+SNMP table definition
+================================================================================
+
+snmpTbl Tbl : 3 : Obj {
+    @snmpIndex
+1:  string column1;
+2:  int column2;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (snmp_table_definition
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (data_structure_block
+      (attribute
+        (identifier))
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier)))
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+SNMP interface definition
+================================================================================
+
+@snmpParamsFrom(Obj)
+snmpIface Iface : 4 : Obj {
+1:  notifUnresponsive
+        in (a, b);
+2:  notifResponsive
+        in (a);
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (snmp_interface_definition
+    (attribute
+      (identifier)
+      (attribute_argument_list
+        (attribute_content)))
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (snmp_rpc_block
+      (snmp_rpc
+        (tag
+          (tag_number))
+        (identifier)
+        (snmp_rpc_in
+          (identifier)
+          (identifier)))
+      (snmp_rpc
+        (tag
+          (tag_number))
+        (identifier)
+        (snmp_rpc_in
+          (identifier))))))

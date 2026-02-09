@@ -1,0 +1,222 @@
+================================================================================
+Simple enum
+================================================================================
+
+enum MyEnumB {
+    A,
+    B,
+    C,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier))
+      (enum_field
+        (identifier))
+      (enum_field
+        (identifier)))))
+
+================================================================================
+Enum with hex values
+================================================================================
+
+enum MyEnumA {
+    A = 0x0,
+    B = 0x1,
+    C = 0x2,
+    D = 0x10,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number))))
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number))))
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number))))
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number)))))))
+
+================================================================================
+Enum with attributes
+================================================================================
+
+@(test:gen1, 1)
+enum MyEnumA {
+    @alias(A_ALIAS)
+    A = 0x0,
+    B = 0x1,
+    @alias(C_ALIAS_1)
+    @alias(C_ALIAS_2)
+    C = 0x2,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (attribute
+      (attribute_argument_list
+        (attribute_content)))
+    (identifier)
+    (enum_block
+      (enum_field
+        (attribute
+          (identifier)
+          (attribute_argument_list
+            (attribute_content)))
+        (identifier)
+        (default_value
+          (value
+            (number))))
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number))))
+      (enum_field
+        (attribute
+          (identifier)
+          (attribute_argument_list
+            (attribute_content)))
+        (attribute
+          (identifier)
+          (attribute_argument_list
+            (attribute_content)))
+        (identifier)
+        (default_value
+          (value
+            (number)))))))
+
+================================================================================
+Enum with expression values
+================================================================================
+
+enum MyEnumC {
+    A = 1 << 0,
+    B = 1 << 1,
+    C = 1 << 2,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number)
+            (operator)
+            (number))))
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number)
+            (operator)
+            (number))))
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number)
+            (operator)
+            (number)))))))
+
+================================================================================
+Enum with prefix attribute
+================================================================================
+
+@prefix(MY_PREFIX)
+enum MyEnum {
+    A,
+    B = MY_ENUM_A + 10,
+    C,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (attribute
+      (identifier)
+      (attribute_argument_list
+        (attribute_content)))
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier))
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (identifier)
+            (operator)
+            (number))))
+      (enum_field
+        (identifier)))))
+
+================================================================================
+Enum with negative value
+================================================================================
+
+enum NegativeEnum {
+    NEG = -2,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number)))))))
+
+================================================================================
+Strict enum
+================================================================================
+
+@strict
+enum EnumStrict {
+    A,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (attribute
+      (identifier))
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier)))))

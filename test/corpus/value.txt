@@ -1,0 +1,120 @@
+================================================================================
+String value
+================================================================================
+
+struct A {
+    string a = "hello";
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (string
+                (string_content)))))))))
+
+================================================================================
+String with escape sequences
+================================================================================
+
+struct A {
+    string a = "fo\"o?cbaré©";
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (string
+                (string_content)))))))))
+
+================================================================================
+Character literal
+================================================================================
+
+struct A {
+    int c1 = c"a";
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (char_literal
+                (string
+                  (string_content))))))))))
+
+================================================================================
+Identifier in value (enum reference)
+================================================================================
+
+struct A {
+    MyEnumA k = MY_ENUM_A_C;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type
+            (identifier))
+          (identifier)
+          (default_value
+            (value
+              (identifier))))))))
+
+================================================================================
+Hex bytes value
+================================================================================
+
+struct A {
+    bytes data = "\x42";
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (string
+                (string_content)))))))))

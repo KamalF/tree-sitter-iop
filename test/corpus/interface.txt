@@ -1,0 +1,216 @@
+================================================================================
+Simple interface
+================================================================================
+
+interface MyIfaceA {
+    funA in (int a) out void;
+    funB out null;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (identifier)
+    (rpc_block
+      (rpc
+        (identifier)
+        (rpc_in
+          (argument_list
+            (variable
+              (type)
+              (identifier))))
+        (rpc_out))
+      (rpc
+        (identifier)
+        (rpc_out)))))
+
+================================================================================
+Interface with in/out/throw
+================================================================================
+
+interface MyIface {
+    createUser
+        in    (string password, string& login)
+        out   (int id, string name)
+        throw MyException;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (identifier)
+    (rpc_block
+      (rpc
+        (identifier)
+        (rpc_in
+          (argument_list
+            (variable
+              (type)
+              (identifier))
+            (variable
+              (type)
+              (type_specifier)
+              (identifier))))
+        (rpc_out
+          (argument_list
+            (variable
+              (type)
+              (identifier))
+            (variable
+              (type)
+              (identifier))))
+        (rpc_throw
+          (identifier))))))
+
+================================================================================
+Interface with throw argument list
+================================================================================
+
+interface Interface1 {
+    foo
+        in    (string input)
+        out   (int output)
+        throw (string err);
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (identifier)
+    (rpc_block
+      (rpc
+        (identifier)
+        (rpc_in
+          (argument_list
+            (variable
+              (type)
+              (identifier))))
+        (rpc_out
+          (argument_list
+            (variable
+              (type)
+              (identifier))))
+        (rpc_throw
+          (argument_list
+            (variable
+              (type)
+              (identifier))))))))
+
+================================================================================
+Interface with tagged RPCs
+================================================================================
+
+interface Interface1 {
+2:  foo
+        in (string input)
+        out (int output);
+
+1:  bar
+        in void
+        out void;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (identifier)
+    (rpc_block
+      (rpc
+        (tag
+          (tag_number))
+        (identifier)
+        (rpc_in
+          (argument_list
+            (variable
+              (type)
+              (identifier))))
+        (rpc_out
+          (argument_list
+            (variable
+              (type)
+              (identifier)))))
+      (rpc
+        (tag
+          (tag_number))
+        (identifier)
+        (rpc_in)
+        (rpc_out)))))
+
+================================================================================
+Interface with attributes
+================================================================================
+
+@(test:gen5, 5)
+interface MyIfaceA {
+    @(test:gen6, 6)
+    funA in (int a) out void;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (attribute
+      (attribute_argument_list
+        (attribute_content)))
+    (identifier)
+    (rpc_block
+      (rpc
+        (attribute
+          (attribute_argument_list
+            (attribute_content)))
+        (identifier)
+        (rpc_in
+          (argument_list
+            (variable
+              (type)
+              (identifier))))
+        (rpc_out)))))
+
+================================================================================
+Interface with struct arguments
+================================================================================
+
+interface MyIfaceA {
+    funC in MyStructA out MyStructB;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (identifier)
+    (rpc_block
+      (rpc
+        (identifier)
+        (rpc_in
+          (identifier))
+        (rpc_out
+          (identifier))))))
+
+================================================================================
+Interface with async (out null)
+================================================================================
+
+interface MyIfaceA {
+    funAsync in (int test) out null;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (identifier)
+    (rpc_block
+      (rpc
+        (identifier)
+        (rpc_in
+          (argument_list
+            (variable
+              (type)
+              (identifier))))
+        (rpc_out)))))

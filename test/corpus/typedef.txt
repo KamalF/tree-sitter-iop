@@ -1,0 +1,93 @@
+================================================================================
+Simple typedef
+================================================================================
+
+typedef string MyString;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_definition
+    (variable
+      (type)
+      (identifier))))
+
+================================================================================
+Typedef with array
+================================================================================
+
+typedef string[] MyStringArray;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_definition
+    (variable
+      (type)
+      (type_specifier)
+      (identifier))))
+
+================================================================================
+Typedef with optional
+================================================================================
+
+typedef string? MyStringOpt;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_definition
+    (variable
+      (type)
+      (type_specifier)
+      (identifier))))
+
+================================================================================
+Typedef with attributes
+================================================================================
+
+@nonEmpty @(cfg:fullAddr, true)
+typedef string FullAddr;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_definition
+    (attribute
+      (identifier))
+    (attribute
+      (attribute_argument_list
+        (attribute_content)))
+    (variable
+      (type)
+      (identifier))))
+
+================================================================================
+Typedef with constraint attributes
+================================================================================
+
+@pattern("[0-9]*")
+typedef string MyNumericalString;
+
+@min(3)
+typedef ulong Min3;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_definition
+    (attribute
+      (identifier)
+      (attribute_argument_list
+        (attribute_content)))
+    (variable
+      (type)
+      (identifier)))
+  (typedef_definition
+    (attribute
+      (identifier)
+      (attribute_argument_list
+        (attribute_content)))
+    (variable
+      (type)
+      (identifier))))

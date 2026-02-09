@@ -1,0 +1,65 @@
+================================================================================
+Simple union
+================================================================================
+
+union MyUnionA {
+    int    ua;
+    byte   ub;
+    string us;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)))
+      (field
+        (variable
+          (type)
+          (identifier)))
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Union with tags
+================================================================================
+
+union MyUnionD {
+5:  int         ua;
+2:  byte        ub;
+10: string      us;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier)))
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier)))
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier))))))

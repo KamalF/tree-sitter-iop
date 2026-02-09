@@ -1,0 +1,314 @@
+================================================================================
+Empty struct
+================================================================================
+
+struct Void {
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block)))
+
+================================================================================
+Struct with fields
+================================================================================
+
+struct Address {
+    int?     number;
+    string[] street;
+    int&     zipCode;
+    string   country;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (type_specifier)
+          (identifier)))
+      (field
+        (variable
+          (type)
+          (type_specifier)
+          (identifier)))
+      (field
+        (variable
+          (type)
+          (type_specifier)
+          (identifier)))
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Struct with default values
+================================================================================
+
+struct MyStructG {
+    int a       = -1;
+    uint b      = 2;
+    string j    = "foo";
+    double l    = 10.5;
+    bool m      = true;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (string
+                (string_content))))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (constant))))))))
+
+================================================================================
+Struct with tags
+================================================================================
+
+struct MyStructD {
+0x2:
+    int a;
+42:
+    int b;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier)))
+      (field
+        (tag
+          (tag_number))
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Struct with constant folding expressions
+================================================================================
+
+struct MyStructH {
+    int a = 10 + 2 * 3;
+    int b = 8 / (4 / 2);
+    int c = 0xfffff & 32 << 2 | 3;
+    int d = -1 + 2 * 30 + ~3;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)
+              (operator)
+              (number)
+              (operator)
+              (number)))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)
+              (operator)
+              (parenthesized_expression
+                (number)
+                (operator)
+                (number))))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)
+              (operator)
+              (number)
+              (operator)
+              (number)
+              (operator)
+              (number)))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)
+              (operator)
+              (number)
+              (operator)
+              (number)
+              (operator)
+              (operator)
+              (number))))))))
+
+================================================================================
+Struct with static field
+================================================================================
+
+struct MyStruct {
+    static int type1 = 42;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (field_qualifier)
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number))))))))
+
+================================================================================
+Struct with attributes on fields
+================================================================================
+
+struct ConstraintS {
+    @maxOccurs(5) @minLength(4) @pattern("[a-zA-Z0-9_]*")
+    string[]    s;
+    @private
+    bool?       priv;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (attribute
+        (identifier)
+        (attribute_argument_list
+          (attribute_content)))
+      (attribute
+        (identifier)
+        (attribute_argument_list
+          (attribute_content)))
+      (attribute
+        (identifier)
+        (attribute_argument_list
+          (attribute_content)))
+      (field
+        (variable
+          (type)
+          (type_specifier)
+          (identifier)))
+      (attribute
+        (identifier))
+      (field
+        (variable
+          (type)
+          (type_specifier)
+          (identifier))))))
+
+================================================================================
+Struct with size suffixes
+================================================================================
+
+struct LogFileConfiguration {
+    int maxSize = 512M;
+    ulong maxTime = 1d;
+    long totalMaxSize = 1G;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number)))))
+      (field
+        (variable
+          (type)
+          (identifier)
+          (default_value
+            (value
+              (number))))))))

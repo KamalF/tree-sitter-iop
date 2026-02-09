@@ -1,0 +1,156 @@
+================================================================================
+Simple class with tag
+================================================================================
+
+class MyClass1 : 1 {
+    int int1;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Class with inheritance
+================================================================================
+
+class MyClass2 : 2 : MyClass1 {
+    int int2;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Abstract class
+================================================================================
+
+abstract class MyClass2Abstract : 6 : MyClass2 {
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    (class_modifier)
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (data_structure_block)))
+
+================================================================================
+Local class
+================================================================================
+
+local class Struct : 2 : Structure {
+    int a;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    (class_modifier)
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Abstract local class
+================================================================================
+
+abstract local class PackageElem {
+    string name;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    (class_modifier)
+    (class_modifier)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Private class
+================================================================================
+
+@private
+class MyClass2Priv : 5 : MyClass2 {
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    (attribute
+      (identifier))
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (data_structure_block)))
+
+================================================================================
+Class with ctype attribute
+================================================================================
+
+@ctype(z_first_diff_c1__t)
+class FirstDiffC1 : 1 : FirstDiffC0 {
+    int i;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    (attribute
+      (identifier)
+      (attribute_argument_list
+        (attribute_content)))
+    (identifier)
+    (class_inheritance
+      (tag_number))
+    (class_inheritance
+      (identifier))
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))

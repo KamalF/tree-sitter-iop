@@ -1,0 +1,110 @@
+================================================================================
+Simple attribute
+================================================================================
+
+@private
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (attribute
+      (identifier))
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Attribute with argument
+================================================================================
+
+@ctype(http_code__t)
+enum HttpCode {
+    OK = 200,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (attribute
+      (identifier)
+      (attribute_argument_list
+        (attribute_content)))
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier)
+        (default_value
+          (value
+            (number)))))))
+
+================================================================================
+Attribute with key-value pair
+================================================================================
+
+@(test:gen1, 1)
+enum MyEnumA {
+    A,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (attribute
+      (attribute_argument_list
+        (attribute_content)))
+    (identifier)
+    (enum_block
+      (enum_field
+        (identifier)))))
+
+================================================================================
+Multiple attributes
+================================================================================
+
+@nonEmpty @(cfg:fullAddr, true)
+typedef string FullAddr;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (typedef_definition
+    (attribute
+      (identifier))
+    (attribute
+      (attribute_argument_list
+        (attribute_content)))
+    (variable
+      (type)
+      (identifier))))
+
+================================================================================
+Attribute with JSON-like content
+================================================================================
+
+@(test:json, "field": { "f1": "val1", "f2": -1.0e2 } )
+struct MyStructA {
+    int a;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (attribute
+      (attribute_argument_list
+        (attribute_content)))
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
