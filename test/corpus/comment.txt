@@ -60,3 +60,93 @@ struct A { int a; };
         (variable
           (type)
           (identifier))))))
+
+================================================================================
+Line comment with doc ref
+================================================================================
+
+// Use \p GridSquare for geo lookups
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment
+    (doc_ref))
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Block comment with doc ref
+================================================================================
+
+/* See \ref geoutils.GridSquare for details */
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment
+    (doc_ref))
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Multi-line block comment with multiple doc refs
+================================================================================
+
+/**
+ * Convert \p LatLon to \p GridSquare using
+ * \ref geoutils.convert for the transformation.
+ */
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment
+    (doc_ref)
+    (doc_ref)
+    (doc_ref))
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Comment with doc ref mixed with regular text
+================================================================================
+
+// Initialize \p Config then call \see setup.init to start
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment
+    (doc_ref)
+    (doc_ref))
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))

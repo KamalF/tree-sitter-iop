@@ -3,12 +3,12 @@ module.exports = grammar({
 
   extras: $ => [
     /\s|\\\r?\n/,
-    $.comment,
   ],
 
   rules: {
 
     source_file: $ => repeat(choice(
+      $.comment,
       $.package_definition,
       $.typedef_definition,
       $.import_definition,
@@ -61,7 +61,7 @@ module.exports = grammar({
 
     module_block: $ => seq(
       "{",
-      repeat($.module_field),
+      repeat(choice($.comment, $.module_field)),
       "}",
     ),
 
@@ -82,7 +82,10 @@ module.exports = grammar({
 
     enum_block: $ => seq(
       "{",
-      repeat(seq($.enum_field, ",")),
+      repeat(choice(
+        $.comment,
+        seq($.enum_field, ","),
+      )),
       "}",
     ),
 
@@ -107,7 +110,7 @@ module.exports = grammar({
 
     rpc_block: $ => seq(
       "{",
-      repeat($.rpc),
+      repeat(choice($.comment, $.rpc)),
       "}",
       optional(";"),
     ),
@@ -177,7 +180,7 @@ module.exports = grammar({
 
     data_structure_block: $ => seq(
       '{',
-      repeat(choice($.attribute, $.field)),
+      repeat(choice($.comment, $.attribute, $.field)),
       '}',
       optional(";"),
     ),
@@ -321,7 +324,7 @@ module.exports = grammar({
 
     snmp_rpc_block: $ => seq(
       "{",
-      repeat($.snmp_rpc),
+      repeat(choice($.comment, $.snmp_rpc)),
       "}",
       optional(";"),
     ),
@@ -358,13 +361,41 @@ module.exports = grammar({
     // including JSON-like structures, expressions, etc.
     attribute_content: _ => /[^()]*(\([^()]*(\([^()]*\))?[^()]*\))?[^()]*/,
 
-    comment: _ => token(choice(
-      seq('//', /(\\+(.|\r?\n)|[^\\\n])*/),
+    // Structured comment with doc_ref support
+    comment: $ => choice(
+      // Line comment
+      seq(
+        '//',
+        repeat(choice(
+          $.doc_ref,
+          token.immediate(/[^\\\n]+/),
+          token.immediate(/\\[a-zA-Z]+/),
+          token.immediate(/\\./),
+          token.immediate(/\\/),
+        )),
+      ),
+      // Block comment
       seq(
         '/*',
-        /[^*]*\*+([^/*][^*]*\*+)*/,
-        '/',
+        repeat(choice(
+          $.doc_ref,
+          token.immediate(/[^*\\\n]+/),
+          token.immediate(/\n/),
+          token.immediate(/\\[a-zA-Z]+/),
+          token.immediate(/\\./),
+          token.immediate(/\\/),
+          token.immediate(/\*[^/]/),
+          token.immediate(/\*/),
+        )),
+        token.immediate('*/'),
       ),
-    )),
+    ),
+
+    doc_ref: $ => token.immediate(prec(1, seq(
+      '\\',
+      choice('p', 'ref', 'see', 'a', 'c', 'class', 'struct', 'enum', 'typedef', 'union'),
+      /[ \t]+/,
+      /[a-zA-Z][.a-zA-Z0-9_]*/,
+    ))),
   }
 });

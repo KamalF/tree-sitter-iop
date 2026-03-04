@@ -123,6 +123,21 @@
     "fields": {}
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "doc_ref",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "constant",
     "named": true,
     "fields": {}
@@ -137,6 +152,10 @@
       "types": [
         {
           "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -201,6 +220,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
         {
           "type": "enum_field",
           "named": true
@@ -332,6 +355,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
         {
           "type": "module_field",
           "named": true
@@ -500,6 +527,10 @@
       "required": false,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "rpc",
           "named": true
         }
@@ -653,6 +684,10 @@
       "required": false,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "snmp_rpc",
           "named": true
         }
@@ -711,6 +746,10 @@
       "types": [
         {
           "type": "class_definition",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -916,6 +955,10 @@
     "named": false
   },
   {
+    "type": "*/",
+    "named": false
+  },
+  {
     "type": "+",
     "named": false
   },
@@ -929,6 +972,14 @@
   },
   {
     "type": "/",
+    "named": false
+  },
+  {
+    "type": "/*",
+    "named": false
+  },
+  {
+    "type": "//",
     "named": false
   },
   {
@@ -992,7 +1043,7 @@
     "named": false
   },
   {
-    "type": "comment",
+    "type": "doc_ref",
     "named": true
   },
   {
