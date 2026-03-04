@@ -49,6 +49,7 @@
 
 ; Comments
 (comment) @comment
+(doc_ref) @type
 
 ; Package
 (package_definition
