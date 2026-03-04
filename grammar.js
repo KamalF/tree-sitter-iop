@@ -361,16 +361,18 @@ module.exports = grammar({
     // including JSON-like structures, expressions, etc.
     attribute_content: _ => /[^()]*(\([^()]*(\([^()]*\))?[^()]*\))?[^()]*/,
 
-    // Structured comment with doc_ref support
+    // Structured comment with doc_ref support.
+    // doc_ref is a single token (token.immediate) that matches the
+    // complete sequence \tag identifier.  It has higher precedence
+    // than the catch-all patterns so the lexer prefers it.
     comment: $ => choice(
       // Line comment
       seq(
         '//',
         repeat(choice(
           $.doc_ref,
+          token.immediate(prec(-1, /\\[^\n]/)),
           token.immediate(/[^\\\n]+/),
-          token.immediate(/\\[a-zA-Z]+/),
-          token.immediate(/\\./),
           token.immediate(/\\/),
         )),
       ),
@@ -379,13 +381,12 @@ module.exports = grammar({
         '/*',
         repeat(choice(
           $.doc_ref,
+          token.immediate(prec(-1, /\\[^\n]/)),
           token.immediate(/[^*\\\n]+/),
           token.immediate(/\n/),
-          token.immediate(/\\[a-zA-Z]+/),
-          token.immediate(/\\./),
-          token.immediate(/\\/),
           token.immediate(/\*[^/]/),
           token.immediate(/\*/),
+          token.immediate(/\\/),
         )),
         token.immediate('*/'),
       ),
