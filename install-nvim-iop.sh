@@ -105,7 +105,7 @@ lua << EOF
   parser_config.iop = {
     install_info = {
       url = '${REPO_DIR_ESC}',
-      files = { 'src/parser.c' },
+      files = { 'src/parser.c', 'src/scanner.c' },
       generate_requires_npm = false,
       requires_generate_from_grammar = false,
     },
@@ -129,10 +129,16 @@ info "Config block added to $VIMRC"
 
 # ─── 4. Compile parser ──────────────────────────────────────────────
 
+# Remove stale compiled parsers so TSInstallSync actually recompiles.
+for p in "$HOME/.local/share/nvim/site/parser" \
+         "$HOME/.local/share/nvim/plugged/nvim-treesitter/parser"; do
+    [[ -f "$p/iop.so" ]] && rm -f "$p/iop.so" && info "Removed stale $p/iop.so"
+done
+
 echo ""
 if timeout 60 nvim --headless \
-    +"lua require('nvim-treesitter.parsers').get_parser_configs().iop = { install_info = { url = '${REPO_DIR_ESC}', files = { 'src/parser.c' } }, filetype = 'iop' }" \
-    +"TSInstallSync iop" \
+    +"lua require('nvim-treesitter.parsers').get_parser_configs().iop = { install_info = { url = '${REPO_DIR_ESC}', files = { 'src/parser.c', 'src/scanner.c' } }, filetype = 'iop' }" \
+    +"TSInstallSync! iop" \
     +qa 2>&1 | tail -3; then
     info "Parser compiled."
 else

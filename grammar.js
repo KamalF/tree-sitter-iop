@@ -360,7 +360,7 @@ module.exports = grammar({
 
     // Flexible attribute content that handles arbitrary nested content
     // including JSON-like structures, expressions, etc.
-    attribute_content: _ => /[^()]*(\([^()]*(\([^()]*\))?[^()]*\))?[^()]*/,
+    attribute_content: _ => /[^()]*(\([^()]*(\([^()]*\))*[^()]*\)[^()]*)*/,
 
     // Structured comment with doc_ref support.
     // doc_ref is a single token (token.immediate) that matches the

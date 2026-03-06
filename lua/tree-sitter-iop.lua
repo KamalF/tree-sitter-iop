@@ -10,7 +10,7 @@ M.setup = function(args)
     filetype = "iop",
     install_info = {
       url = url,
-      files = { "src/parser.c" },
+      files = { "src/parser.c", "src/scanner.c" },
     },
   }
 end
