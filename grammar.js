@@ -3,12 +3,16 @@ module.exports = grammar({
 
   extras: $ => [
     /\s|\\\r?\n/,
+    $.comment,
+  ],
+
+  externals: $ => [
+    $._block_comment_content,
   ],
 
   rules: {
 
     source_file: $ => repeat(choice(
-      $.comment,
       $.package_definition,
       $.typedef_definition,
       $.import_definition,
@@ -61,7 +65,7 @@ module.exports = grammar({
 
     module_block: $ => seq(
       "{",
-      repeat(choice($.comment, $.module_field)),
+      repeat($.module_field),
       "}",
     ),
 
@@ -82,10 +86,7 @@ module.exports = grammar({
 
     enum_block: $ => seq(
       "{",
-      repeat(choice(
-        $.comment,
-        seq($.enum_field, ","),
-      )),
+      repeat(seq($.enum_field, ",")),
       "}",
     ),
 
@@ -110,7 +111,7 @@ module.exports = grammar({
 
     rpc_block: $ => seq(
       "{",
-      repeat(choice($.comment, $.rpc)),
+      repeat($.rpc),
       "}",
       optional(";"),
     ),
@@ -180,7 +181,7 @@ module.exports = grammar({
 
     data_structure_block: $ => seq(
       '{',
-      repeat(choice($.comment, $.attribute, $.field)),
+      repeat(choice($.attribute, $.field)),
       '}',
       optional(";"),
     ),
@@ -324,7 +325,7 @@ module.exports = grammar({
 
     snmp_rpc_block: $ => seq(
       "{",
-      repeat(choice($.comment, $.snmp_rpc)),
+      repeat($.snmp_rpc),
       "}",
       optional(";"),
     ),
@@ -366,27 +367,16 @@ module.exports = grammar({
     // complete sequence \tag identifier.  It has higher precedence
     // than the catch-all patterns so the lexer prefers it.
     comment: $ => choice(
-      // Line comment
-      seq(
-        '//',
-        repeat(choice(
-          $.doc_ref,
-          token.immediate(prec(-1, /\\[^\n]/)),
-          token.immediate(/[^\\\n]+/),
-          token.immediate(/\\/),
-        )),
-      ),
+      // Line comment (single token — doc_ref only in block comments)
+      token(seq('//', /[^\n]*/)),
       // Block comment
       seq(
         '/*',
         repeat(choice(
           $.doc_ref,
           token.immediate(prec(-1, /\\[^\n]/)),
-          token.immediate(/[^*\\\n]+/),
-          token.immediate(/\n/),
-          token.immediate(/\*[^/]/),
-          token.immediate(/\*/),
           token.immediate(/\\/),
+          $._block_comment_content,
         )),
         token.immediate('*/'),
       ),

@@ -71,8 +71,7 @@ struct A { int a; };
 --------------------------------------------------------------------------------
 
 (source_file
-  (comment
-    (doc_ref))
+  (comment)
   (data_structure_definition
     (data_structure_type)
     (identifier)
@@ -139,9 +138,7 @@ struct A { int a; };
 --------------------------------------------------------------------------------
 
 (source_file
-  (comment
-    (doc_ref)
-    (doc_ref))
+  (comment)
   (data_structure_definition
     (data_structure_type)
     (identifier)
@@ -150,3 +147,94 @@ struct A { int a; };
         (variable
           (type)
           (identifier))))))
+
+================================================================================
+Banner comment with stars
+================================================================================
+
+/******************************************************************************/
+struct A { int a; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Comment between tag and field
+================================================================================
+
+struct A {
+  0: /* field comment */ int a;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (data_structure_definition
+    (data_structure_type)
+    (identifier)
+    (data_structure_block
+      (field
+        (tag
+          (tag_number))
+        (comment)
+        (variable
+          (type)
+          (identifier))))))
+
+================================================================================
+Comment between enum values
+================================================================================
+
+enum E {
+  /* first value */
+  A,
+  /* second value */
+  B,
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_definition
+    (identifier)
+    (enum_block
+      (comment)
+      (enum_field
+        (identifier))
+      (comment)
+      (enum_field
+        (identifier)))))
+
+================================================================================
+Comment between RPCs
+================================================================================
+
+interface I {
+  /* first rpc */
+  foo;
+  /* second rpc */
+  bar;
+};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_definition
+    (identifier)
+    (rpc_block
+      (comment)
+      (rpc
+        (identifier))
+      (comment)
+      (rpc
+        (identifier)))))
