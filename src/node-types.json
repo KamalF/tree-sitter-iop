@@ -12,6 +12,10 @@
           "named": true
         },
         {
+          "type": "tag",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }

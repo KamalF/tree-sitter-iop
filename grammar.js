@@ -143,8 +143,8 @@ module.exports = grammar({
 
     argument_list: $ => seq(
       "(",
-      repeat(seq(repeat($.attribute), $.variable, ",")),
-      optional(seq(repeat($.attribute), $.variable)),
+      repeat(seq(repeat($.attribute), optional($.tag), $.variable, ",")),
+      optional(seq(repeat($.attribute), optional($.tag), $.variable)),
       ")"
     ),
 
@@ -358,9 +358,9 @@ module.exports = grammar({
       ")"
     ),
 
-    // Flexible attribute content that handles arbitrary nested content
-    // including JSON-like structures, expressions, etc.
-    attribute_content: _ => /[^()]*(\([^()]*(\([^()]*\))*[^()]*\)[^()]*)*/,
+    // Flexible attribute content: handles quoted strings (opaque, parens inside
+    // don't need balancing) and up to two levels of explicit paren nesting.
+    attribute_content: _ => /([^()"\\]|\\.|"([^"\\]|\\.)*"|\(([^()"\\]|\\.|"([^"\\]|\\.)*"|\(([^()"\\]|\\.|"([^"\\]|\\.)*")*\))*\))*/,
 
     // Structured comment with doc_ref support.
     // doc_ref is a single token (token.immediate) that matches the

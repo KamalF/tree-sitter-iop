@@ -586,6 +586,18 @@
                 }
               },
               {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "tag"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
                 "type": "SYMBOL",
                 "name": "variable"
               },
@@ -608,6 +620,18 @@
                     "type": "SYMBOL",
                     "name": "attribute"
                   }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "tag"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 },
                 {
                   "type": "SYMBOL",
@@ -1443,7 +1467,7 @@
     },
     "attribute_content": {
       "type": "PATTERN",
-      "value": "[^()]*(\\([^()]*(\\([^()]*\\))*[^()]*\\)[^()]*)*"
+      "value": "([^()\"\\\\]|\\\\.|\"([^\"\\\\]|\\\\.)*\"|\\(([^()\"\\\\]|\\\\.|\"([^\"\\\\]|\\\\.)*\"|\\(([^()\"\\\\]|\\\\.|\"([^\"\\\\]|\\\\.)*\")*\\))*\\))*"
     },
     "comment": {
       "type": "CHOICE",
