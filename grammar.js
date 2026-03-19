@@ -340,7 +340,10 @@ module.exports = grammar({
 
     snmp_rpc_in: $ => seq(
       "in",
-      seq("(", repeat(seq($.identifier, ",")), optional($.identifier), ")"),
+      "(",
+      repeat(seq($.identifier, ",")),
+      optional($.identifier),
+      ")",
     ),
 
     attribute: $ => seq(
